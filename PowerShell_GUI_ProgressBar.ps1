@@ -1,14 +1,12 @@
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-function WriteJobProgress
+function GetJobProgress
 {
     param($Job)
  
-    #Make sure the first child job exists
     if($Job.ChildJobs[0].Progress -ne $null)
     {
-        #Extracts the latest progress of the job and writes the progress
         $jobProgressHistory = $Job.ChildJobs[0].Progress;
         $latestProgress = $jobProgressHistory[$jobProgressHistory.Count - 1];
         $latestPercentComplete = $latestProgress | Select -expand PercentComplete;
@@ -199,7 +197,7 @@ while((Get-Job | Where-Object {$_.State -ne "Completed"}).Count -gt 0)
 
     foreach ($J in $Job)
     {
-        $Percent_And_Status=WriteJobProgress($J)
+        $Percent_And_Status=GetJobProgress($J)
         
         $Temp[($a*2)].Value=$Percent_And_Status[0]
         $Temp[($a*2)+1].Text="$($All_DCs[$a]) - "+$Percent_And_Status[1]
@@ -221,7 +219,7 @@ while((Get-Job | Where-Object {$_.State -ne "Completed"}).Count -gt 0)
 $b=0
 foreach ($J in $Job)
 {
-    $Percent_And_Status=WriteJobProgress($J)
+    $Percent_And_Status=GetJobProgress($J)
     
     if($Percent_And_Status[0] -lt 100)
     {
