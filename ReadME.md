@@ -8,7 +8,7 @@ Form 1
 
 Form 2
 ----------------
-![alt text](https://github.com/kujalk/PowerShell_GUI_ProgressBar/blob/main/Images/Form12.PNG)
+![alt text](https://github.com/kujalk/PowerShell_GUI_ProgressBar/blob/main/Images/Form2.PNG)
 
 Final Form 
 ----------------
